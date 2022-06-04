@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {onMounted, reactive, ref, type Ref} from 'vue'
+  import {inject, onMounted, reactive, ref, type Ref} from 'vue'
   interface Todo {
     id: string
     txt: string
@@ -14,8 +14,9 @@
     (e: 'remove', id: string): void
   }>()
 
+  const darkMode = inject<Ref<boolean>>('dark-mode')
+
   function toggleDone(): void {
-    console.log('todo', props.todo)
     // const todo: Todo | undefined = todos.value.find((t) => t.id === todoId)
     props.todo!.done = !props.todo?.done // to fix Object is possibly 'undefined'
   }
@@ -26,7 +27,7 @@
 </script>
 <template>
   <li>
-    <pre :class="{done: todo!.done}">{{ todo }}</pre>
+    <pre :class="{done: todo!.done, dark:darkMode}">{{ todo }}</pre>
     <div class="btns-container">
       <button @click="removeTodo(todo!.id)">Delete</button>
       <button @click="toggleDone()">Done</button>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {reactive, ref, type Ref} from 'vue'
+  import {provide, reactive, ref, type Ref} from 'vue'
   import todoList from '../components/todo-list.vue'
 
   interface Todo {
@@ -36,10 +36,22 @@
     }
     todos.value.push(todo)
   }
+
+  const darkMode = ref(false)
+  const toggleDarkMode = () => {
+    darkMode.value = !darkMode.value
+    const elBody = document.querySelector('body')
+    darkMode.value
+      ? (elBody!.style.backgroundColor = 'black')
+      : (elBody!.style.backgroundColor = 'white')
+  }
+
+  provide('dark-mode', darkMode)
 </script>
 
 <template>
   <div class="greetings">
+    <button @click="toggleDarkMode">Toggle theme</button>
     <h1>Hi Todos</h1>
 
     <input type="text" v-model="todoText" />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {reactive, ref, type Ref} from 'vue'
+  import {inject, reactive, ref, type Ref} from 'vue'
   import todoPreview from '../components/todo-preview.vue'
 
   interface Todo {
@@ -15,10 +15,13 @@
   const emit = defineEmits<{
     (e: 'remove', id: string): void
   }>()
+
+  const darkMode = inject<Ref<boolean>>('dark-mode')
 </script>
 <template>
   <ul>
     <todoPreview
+      :class="{dark: darkMode}"
       @remove="(todoId) => emit('remove', todoId)"
       v-for="todo in todos"
       :todo="todo"
