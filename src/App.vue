@@ -52,6 +52,7 @@
     header {
       display: flex;
       place-items: center;
+      justify-content: center;
       /* padding-right: calc(var(--section-gap) / 2); */
     }
 
