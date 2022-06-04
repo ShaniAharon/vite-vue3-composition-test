@@ -26,6 +26,7 @@
     const removedTodo = todos.value.splice(idx, 1)[0]
     console.log('removedTodo', removedTodo)
   }
+
   function addTodo(txt: string): void {
     const todo = {
       id: makeId(),
@@ -33,6 +34,11 @@
       done: false,
     }
     todos.value.push(todo)
+  }
+
+  function toggleDone(todoId: string): void {
+    const todo: Todo | undefined = todos.value.find((t) => t.id === todoId)
+    todo!.done = !todo?.done // to fix Object is possibly 'undefined'
   }
 </script>
 
@@ -45,10 +51,10 @@
 
     <ul>
       <li v-for="todo in todos" :key="todo.id">
-        <pre>{{ todo }}</pre>
+        <pre :class="{done: todo.done}">{{ todo }}</pre>
         <div class="btns-container">
           <button @click="removeTodo(todo.id)">Delete</button>
-          <button>Edit</button>
+          <button @click="toggleDone(todo.id)">Done</button>
         </div>
       </li>
     </ul>
