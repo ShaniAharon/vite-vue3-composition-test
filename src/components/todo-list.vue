@@ -19,7 +19,7 @@
   const darkMode = inject<Ref<boolean>>('dark-mode')
 </script>
 <template>
-  <ul>
+  <ul v-if="todos">
     <todoPreview
       :class="{dark: darkMode}"
       @remove="(todoId) => emit('remove', todoId)"
