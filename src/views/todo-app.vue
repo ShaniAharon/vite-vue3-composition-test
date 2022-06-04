@@ -12,6 +12,10 @@
     createdAt: number
   }
 
+  const props = defineProps({
+    msg: String,
+  })
+
   // state
   const todoText: Ref<string> = ref('')
   const searchText: Ref<string> = ref('')

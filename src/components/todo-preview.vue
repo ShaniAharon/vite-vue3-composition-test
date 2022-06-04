@@ -8,6 +8,7 @@
 
   const props = defineProps({
     todo: Object,
+    msg: String,
   })
 
   const emit = defineEmits<{
